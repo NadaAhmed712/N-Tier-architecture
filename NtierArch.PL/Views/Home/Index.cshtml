@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4 text-center py-5 bg-light">
+        <div class="card-body">
+            <h1 class="display-4 fw-bold text-primary mb-3">@SharedLocalizer["Welcome to"] @SharedLocalizer["NtierArch System"]👋</h1>
+            <p class="lead text-secondary mb-4">
+                @SharedLocalizer["Manage your"] <strong>@SharedLocalizer["Employees"]</strong> @SharedLocalizer["and"] <strong>@SharedLocalizer["Departments"]</strong> @SharedLocalizer["efficiently with ASP.NET Core MVC"].
+            </p>
+
+            <div class="d-flex justify-content-center gap-3">
+                <a asp-controller="Employee" asp-action="Index" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="bi bi-people-fill me-2"></i> @SharedLocalizer["Go to"] @SharedLocalizer["Employees"]
+                </a>
+                <a asp-controller="Department" asp-action="Index" class="btn btn-outline-success btn-lg px-4">
+                    <i class="bi bi-building me-2"></i> @SharedLocalizer["Go to"] @SharedLocalizer["Departments"]
+                </a>
+            </div>
+
+            <hr class="my-5">
+
+            <p class="text-muted">
+                @SharedLocalizer["Learn more about"]
+                <a href="https://learn.microsoft.com/aspnet/core" target="_blank" class="text-decoration-none fw-semibold">
+                    @SharedLocalizer["building web apps with ASP.NET Core"]
+                </a>.
+            </p>
+        </div>
+    </div>
+</div>

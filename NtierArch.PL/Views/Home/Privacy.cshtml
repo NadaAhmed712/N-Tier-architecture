@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0 rounded-4 bg-light">
+        <div class="card-header bg-primary text-white text-center fw-bold fs-4 py-3">
+            🔒 @ViewData["Title"]
+        </div>
+
+        <div class="card-body p-4">
+            <p class="lead text-secondary mb-4">
+                Your privacy is important to us. This page outlines how we handle and protect your personal information.
+            </p>
+
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">
+                    <strong>Data Collection:</strong> We only collect necessary information to improve our services.
+                </li>
+                <li class="list-group-item">
+                    <strong>Data Usage:</strong> Your data will not be shared or sold to third parties.
+                </li>
+                <li class="list-group-item">
+                    <strong>Cookies:</strong> We use cookies to enhance your user experience.
+                </li>
+                <li class="list-group-item">
+                    <strong>Security:</strong> All information is securely stored and protected.
+                </li>
+            </ul>
+
+            <p class="text-muted">
+                For more details or inquiries, please contact our support team.
+            </p>
+
+            <div class="text-center mt-4">
+                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="bi bi-house-door"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

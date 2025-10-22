@@ -1,0 +1,93 @@
+﻿@using NtierArch.BLL.ModelVM.Department
+@model UpdateEmployeeVM
+@{
+    var Departments = (Response<List<GetDepartmentVM>>)ViewBag.departments;
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center fw-bold  px-4 me-2">
+            ✏️ Update Employee
+        </div>
+
+        <div class="card-body bg-light p-4">
+            <form asp-action="Update" asp-controller="Employee" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label fw-semibold">
+                            <i class="bi bi-person-fill me-1"></i> Name
+                        </label>
+                        <input asp-for="Name" class="form-control form-control-lg" type="text" placeholder="Enter employee name" />
+                        <span class="text-danger small" asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Age" class="form-label fw-semibold">
+                            <i class="bi bi-calendar2-date me-1"></i> Age
+                        </label>
+                        <input asp-for="Age" class="form-control form-control-lg" type="number" placeholder="Enter employee age" min="18" max="80" />
+                        <span class="text-danger small" asp-validation-for="Age"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Salary" class="form-label fw-semibold">
+                            <i class="bi bi-cash-coin me-1"></i> Salary
+                        </label>
+                        <input asp-for="Salary" class="form-control form-control-lg" type="number" placeholder="Enter salary amount" />
+                        <span class="text-danger small" asp-validation-for="Salary"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="DeptId" class="form-label fw-semibold">
+                            <i class="bi bi-building me-1"></i> Department
+                        </label>
+                        @if (Departments.IsHaveError)
+                        {
+                            <div class="alert alert-danger text-center">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                                @Departments.ErrorMessage
+                            </div>
+                        }
+                        else
+                        {
+                            <select class="form-select form-select-lg" asp-for="DeptId">
+                                @foreach (var item in Departments.Result)
+                                {
+                                    if (item.Id == Model.DeptId)
+                                    {
+                                        <option selected value="@item.Id">@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                            <span class="text-danger small" asp-validation-for="DeptId"></span>
+                        }
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Image" class="form-label fw-semibold">
+                            <i class="bi bi-image me-1"></i> Profile Image
+                        </label>
+                        <input asp-for="Image" class="form-control form-control-lg" type="file"  />
+
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center gap-3 mt-4">
+                        <button type="submit" class="btn btn-primary px-4 me-2">
+                            <i class="bi bi-save"></i> Update Employee
+                        </button>
+                        <a asp-action="Index" asp-controller="Employee" class="btn btn-outline-secondary btn-lg px-4">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
