@@ -8,6 +8,8 @@ namespace NtierArch.DAL.Common
         {
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+
+            services.AddScoped<IAccountService, AccountService>();
             services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
             return services;
         }

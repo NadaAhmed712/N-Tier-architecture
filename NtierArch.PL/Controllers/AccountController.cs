@@ -11,13 +11,15 @@ namespace NtierArch.PL.Controllers
     public class AccountController : Controller
     {
         private readonly IDepartmentService departmentService;
+        private readonly IAccountService accountService;
         private readonly SignInManager<Employee> signInManager;
         private readonly UserManager<Employee> userManger;
 
-        public AccountController(UserManager<Employee> userManger, IDepartmentService departmentService, SignInManager<Employee> signInManager)
+        public AccountController(UserManager<Employee> userManger, SignInManager<Employee> signInManager, IDepartmentService departmentService, IAccountService accountService)
         {
             this.userManger = userManger;
             this.departmentService = departmentService;
+            this.accountService = accountService;
             this.signInManager = signInManager;
         }
         [HttpGet]
@@ -29,24 +31,23 @@ namespace NtierArch.PL.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterEmployeeVM model)
         {
-            string image = Upload.UploadFile("Files", model.Image);
-            var user = new Employee(model.Name, model.Age, model.Salary, image, model.DeptId, "Nada Ahmed", model.UserName);
+            if (!ModelState.IsValid)
+                return View("Register", model);
+            var result = await accountService.RegisterUser(model);
 
-
-            var result = await userManger.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
+            if (result.IsHaveError==false)
             {
                 return RedirectToAction("Login");
             }
             else
             {
-                foreach (var item in result.Errors)
+                foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("Password", item.Description);
+                   
+                    ModelState.AddModelError("Password", error);
                 }
+                return View(model);
             }
-            return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> Login()
@@ -67,7 +68,7 @@ namespace NtierArch.PL.Controllers
                 ModelState.AddModelError("", "Invalid UserName Or Password");
 
             }
-            return View();
+            return View(model);
         }
     }
 }
