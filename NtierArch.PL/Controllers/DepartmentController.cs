@@ -1,4 +1,5 @@
-﻿using NtierArch.BLL.ModelVM.Department;
+﻿using Microsoft.AspNetCore.Authorization;
+using NtierArch.BLL.ModelVM.Department;
 
 namespace NtierArch.PL.Controllers
 {
@@ -25,6 +26,8 @@ namespace NtierArch.PL.Controllers
             return View(result);
         }
         [HttpGet]
+
+        [Authorize]
         public IActionResult Create()
         {
             return View();

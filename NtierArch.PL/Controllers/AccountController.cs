@@ -11,12 +11,14 @@ namespace NtierArch.PL.Controllers
     public class AccountController : Controller
     {
         private readonly IDepartmentService departmentService;
+        private readonly SignInManager<Employee> signInManager;
         private readonly UserManager<Employee> userManger;
 
-        public AccountController(UserManager<Employee> userManger, IDepartmentService departmentService)
+        public AccountController(UserManager<Employee> userManger, IDepartmentService departmentService, SignInManager<Employee> signInManager)
         {
             this.userManger = userManger;
             this.departmentService = departmentService;
+            this.signInManager = signInManager;
         }
         [HttpGet]
         public async Task<IActionResult> Register()
@@ -46,8 +48,25 @@ namespace NtierArch.PL.Controllers
             }
             return View(model);
         }
-        public IActionResult Login()
+        [HttpGet]
+        public async Task<IActionResult> Login()
         {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginEmployeeVM model)
+        {
+            var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid UserName Or Password");
+
+            }
             return View();
         }
     }
