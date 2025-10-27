@@ -121,7 +121,7 @@
     <value>Name</value>
   </data>
   <data name="DeptId" xml:space="preserve">
-    <value>Department</value>
+    <value>DeptId</value>
   </data>
   <data name="Salary" xml:space="preserve">
     <value>Salary</value>
@@ -133,7 +133,7 @@
     <value>Department</value>
   </data>
   <data name="Arabic" xml:space="preserve">
-    <value>Department</value>
+    <value>Arabic</value>
   </data>
   <data name="building web apps with ASP.NET Core" xml:space="preserve">
     <value>building web apps with ASP.NET Core</value>
@@ -151,7 +151,7 @@
     <value>Employees</value>
   </data>
   <data name="Departments" xml:space="preserve">
-    <value>Department</value>
+    <value>Departments</value>
   </data>
   <data name="Learn more about" xml:space="preserve">
     <value>Learn more about</value>
