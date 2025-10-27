@@ -20,7 +20,7 @@
             var result = employeeService.GetNotActiveEmployees();
             return View(result);
         }
-        public IActionResult GetEmployee(int id)
+        public IActionResult GetEmployee(string id)
         {
             var result = employeeService.GetEmployee(id);
             return View(result);
@@ -41,7 +41,7 @@
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(string id)
         {
             var response = employeeService.GetEmployee(id);
             //var map = mapper.Map<UpdateEmployeeVM>(response.Result);
@@ -65,7 +65,7 @@
             employeeService.Edit(employee);
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(string Id)
         {
             employeeService.ToggleStatus(Id);
             return RedirectToAction("Index");

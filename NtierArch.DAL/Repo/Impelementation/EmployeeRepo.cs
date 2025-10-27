@@ -13,7 +13,7 @@
             {
                 var result = _context.Employees.Add(employee);
                 _context.SaveChanges();
-                if (result.Entity.Id>0)
+                if (result.Entity.Id!=null)
                     return true;
                 return false;
 
@@ -69,7 +69,7 @@
             }
         }
 
-        public Employee GetEmployeeById(int id)
+        public Employee GetEmployeeById(string id)
         {
             try
             {
@@ -83,7 +83,7 @@
             }
         }
 
-        public bool ToggleStatus(int id, string UserName)
+        public bool ToggleStatus(string id, string UserName)
         {
             try
             {

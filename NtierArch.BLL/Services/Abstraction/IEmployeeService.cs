@@ -6,8 +6,8 @@ namespace NtierArch.BLL.Services.Abstraction
     {
         Response<bool> Add(CreateEmployeeVM employee);
         Response<bool> Edit(UpdateEmployeeVM employee);
-        Response<bool> ToggleStatus(int id);
-        Response<GetEmployeeVM> GetEmployee(int id);
+        Response<bool> ToggleStatus(string id);
+        Response<GetEmployeeVM> GetEmployee(string id);
         Response<List<GetEmployeeVM>> GetActiveEmployees();
         Response<List<GetEmployeeVM>> GetNotActiveEmployees();
     }

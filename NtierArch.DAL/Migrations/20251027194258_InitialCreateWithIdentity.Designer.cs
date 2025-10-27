@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NtierArch.DAL.Database;
 
@@ -11,9 +12,11 @@ using NtierArch.DAL.Database;
 namespace NtierArch.DAL.Migrations
 {
     [DbContext(typeof(NtierArchDbContext))]
-    partial class NtierArchDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251027194258_InitialCreateWithIdentity")]
+    partial class InitialCreateWithIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

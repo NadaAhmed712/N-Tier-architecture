@@ -1,6 +1,8 @@
-﻿namespace NtierArch.DAL.Database
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace NtierArch.DAL.Database
 {
-    public class NtierArchDbContext:DbContext
+    public class NtierArchDbContext:IdentityDbContext
     {
         public NtierArchDbContext(DbContextOptions<NtierArchDbContext> options) : base(options)
         {

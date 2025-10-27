@@ -42,7 +42,7 @@
         }
 
 
-        public Response<GetEmployeeVM> GetEmployee(int id)
+        public Response<GetEmployeeVM> GetEmployee(string id)
         {
             try
             {
@@ -111,7 +111,7 @@
             }
         }
 
-        public Response<bool> ToggleStatus(int id)
+        public Response<bool> ToggleStatus(string id)
         {
             try
             {

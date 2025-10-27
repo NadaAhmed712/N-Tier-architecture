@@ -1,8 +1,9 @@
-﻿namespace NtierArch.DAL.Entity
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace NtierArch.DAL.Entity
 {
-    public class Employee
+    public class Employee: IdentityUser
     {
-        public int Id { get; private set; }
         public string Name { get; private set; }
         public int Age { get; private set; }
         public decimal Salary { get; private set; }
@@ -27,6 +28,17 @@
             CreatedBy = createdBy;
             CreatedOn=DateTime.Now;
             Image = image;
+            DeptId = deptId;
+        }
+        public Employee(string name, int age, decimal salary, String image, int deptId, string createdBy, string userName)
+        {
+            Name = name;
+            Age = age;
+            Salary = salary;
+            CreatedBy = createdBy;
+            CreatedOn = DateTime.Now;
+            Image = image;
+            UserName = userName;
             DeptId = deptId;
         }
         public bool Update(string name, int age, decimal salary, int deptId, string userModified) {

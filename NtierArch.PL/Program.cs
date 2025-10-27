@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using NtierArch.DAL.Entity;
+
 namespace NtierArch.PL
 {
     public class Program
@@ -18,6 +22,31 @@ namespace NtierArch.PL
 
             builder.Services.AddDbContext<NtierArchDbContext>(options =>
             options.UseSqlServer(connectionString));
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                options =>
+                {
+                    options.LoginPath = new PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/Login");
+                });
+
+
+
+            builder.Services.AddIdentityCore<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
+                            .AddEntityFrameworkStores<NtierArchDbContext>()
+                            .AddTokenProvider<DataProtectorTokenProvider<Employee>>(TokenOptions.DefaultProvider);
+
+            builder.Services.AddIdentity<Employee, IdentityRole>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+            }).AddEntityFrameworkStores<NtierArchDbContext>();
 
             builder.Services.AddBusinessInDAL();
             builder.Services.AddBusinessInBLL();
@@ -40,7 +69,7 @@ namespace NtierArch.PL
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
