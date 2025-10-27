@@ -34,6 +34,7 @@ namespace NtierArch.PL
 
 
             builder.Services.AddIdentityCore<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
+                            .AddRoles<IdentityRole>()
                             .AddEntityFrameworkStores<NtierArchDbContext>()
                             .AddTokenProvider<DataProtectorTokenProvider<Employee>>(TokenOptions.DefaultProvider);
 

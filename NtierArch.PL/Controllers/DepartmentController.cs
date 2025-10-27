@@ -20,6 +20,7 @@ namespace NtierArch.PL.Controllers
             var result = departmentService.GetNotActiveDepartments();
             return View("Index",result);
         }
+        [Authorize]
         public IActionResult GetDepartment(int id)
         {
             var result = departmentService.GetDepartment(id);
@@ -27,7 +28,7 @@ namespace NtierArch.PL.Controllers
         }
         [HttpGet]
 
-        [Authorize]
+        [Authorize(Roles ="User")]
         public IActionResult Create()
         {
             return View();
