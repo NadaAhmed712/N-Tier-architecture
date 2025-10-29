@@ -29,51 +29,51 @@ namespace NtierArch.PL.Controllers
             return View();
         }
         [HttpPost]
-        //public async Task<IActionResult> Register(RegisterEmployeeVM model)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View("Register", model);
-        //    var result = await accountService.RegisterUser(model);
-
-        //    if (result.IsHaveError==false)
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-        //    else
-        //    {
-        //        foreach (var error in result.Errors)
-        //        {
-
-        //            ModelState.AddModelError("Password", error);
-        //        }
-        //        return View(model);
-        //    }
-        //}
-        [HttpPost]
         public async Task<IActionResult> Register(RegisterEmployeeVM model)
         {
             if (!ModelState.IsValid)
-            {
-                ViewBag.departments = departmentService.GetActiveDepartments();
                 return View("Register", model);
-            }
-            string image = Upload.UploadFile("Files", model.Image);
-            var user = new Employee(model.Name, model.Age, model.Salary, image, model.DeptId, "Nada Ahmed", model.UserName);
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await accountService.RegisterUser(model);
 
-            if (result.Succeeded)
+            if (result.IsHaveError == false)
             {
                 return RedirectToAction("Login");
             }
             else
             {
-                foreach (var item in result.Errors)
+                foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("Password", item.Description);
+
+                    ModelState.AddModelError("Password", error);
                 }
                 return View(model);
             }
         }
+        //[HttpPost]
+        //public async Task<IActionResult> Register(RegisterEmployeeVM model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        ViewBag.departments = departmentService.GetActiveDepartments();
+        //        return View("Register", model);
+        //    }
+        //    string image = Upload.UploadFile("Files", model.Image);
+        //    var user = new Employee(model.Name, model.Age, model.Salary, image, model.DeptId, "Nada Ahmed", model.UserName);
+        //    var result = await userManager.CreateAsync(user, model.Password);
+
+        //    if (result.Succeeded)
+        //    {
+        //        return RedirectToAction("Login");
+        //    }
+        //    else
+        //    {
+        //        foreach (var item in result.Errors)
+        //        {
+        //            ModelState.AddModelError("Password", item.Description);
+        //        }
+        //        return View(model);
+        //    }
+        //}
         [HttpGet]
         public async Task<IActionResult> Login()
         {
